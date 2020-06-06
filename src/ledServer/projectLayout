@@ -1,0 +1,20 @@
+*-------------------HEAD-------------------*
+this project is a communication server for the arduino led setup 
+
+-General organization:
+there should be no use of user input scanners outside of the main class. 
+all input in the main class should be handled by one method with variables. 
+This will allow easy expansion to the GUI.
+
+
+-Layout:
+	-Communication:
+		all communication related things will be handled by the SerialCom class. All serial data should be properly encapsulated inside this class.
+			-Communication Protocol
+				Communication in this is fairly simple, data is sent to the arduino in the form of commands that are then parsed.
+				recieving data is done much in the same way through the use of a scanner. If the issue of too much data being sent comes up it may be 
+				nessisary to use a confirmation system were the arduino waits to send data till there is confirmation on the server end
+				
+		
+		
+
