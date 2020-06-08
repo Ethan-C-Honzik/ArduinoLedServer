@@ -10,14 +10,16 @@ public class SerialCom {
 	private final String DEFAULT_PORT_NAME = "Arduino";
 	private String devicePortName;
 	private SerialPort arduinoPort = null;
-	private Scanner sc;
+	private Scanner scSerial, scUser;
 
 	public SerialCom() {
+		scUser = new Scanner(System.in);
 		devicePortName = DEFAULT_PORT_NAME;
 		initConnection();
 	}
 
 	public SerialCom(String DeviceName) {
+		scUser = new Scanner(System.in);
 		devicePortName = DeviceName;
 		initConnection();
 	}
@@ -47,33 +49,40 @@ public class SerialCom {
 				break;
 			}
 		}
-
-		if (arduinoPort != null) {
+		if(arduinoPort == null) {
+			System.out.println("Could not auto-detect Arduino. Please manually select a port");
+			arduinoPort = serialPorts[scUser.nextInt()];
+		}
+				
+		try {
 			arduinoPort.setComPortParameters(500000, 8, 1, 0); // default connection settings for Arduino
 			arduinoPort.setComPortTimeouts(SerialPort.TIMEOUT_SCANNER, 0, 0); // block until bytes can be written
-			sc = new Scanner(arduinoPort.getInputStream());
-		} else {
-			System.out.println("Could Not find arduino");
+			scSerial = new Scanner(arduinoPort.getInputStream());
+		} catch (Exception e) {
+			System.out.println("Could Not find Arduino on selected port or an error occurred. Try again");
+			initConnection();
 		}
+
 	}
 
-	public void sendData(String data) throws InterruptedException  {
+	public void sendData(String data) throws InterruptedException {
 		try {
-			//System.out.println(data);
+			// System.out.println(data);
 			arduinoPort.getOutputStream().write(data.getBytes());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//sc.next line freezes all code until the Arduino has confirmed it has received the message
-		if(data.contains("ref")) {
-			String time = sc.nextLine();
+		// sc.next line freezes all code until the Arduino has confirmed it has received
+		// the message
+		if (data.contains("ref")) {
+			String time = scSerial.nextLine();
 			System.out.println(time);
 		}
 
 	}
 
 	public String ReciveData() {
-		return sc.nextLine();
+		return scSerial.nextLine();
 	}
 }

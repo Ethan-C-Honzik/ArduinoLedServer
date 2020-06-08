@@ -15,8 +15,8 @@ public class Main {
 		}
 		//command.PrimeLeds(); 
 		
-		LEDtest();
-		for(int j = 0; j< 5000000; j++) {
+		//LEDtest();
+		for(int j = 0; j< 50000000; j++) {
 			screen.UpdateColorSections();
 			for(int i = 0; i < 16; i++) {
 				//String hex = Integer.toHexString(screen.colorSecs[i].getRGB() & 0xffffff);
