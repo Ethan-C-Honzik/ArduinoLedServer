@@ -3,6 +3,7 @@ package ledServer;
 public class Main {
 	private static CommandManager command = new CommandManager();
 	private static ScreenRecorder screen = new ScreenRecorder();
+	public static boolean debug = false;
 
 	public static void main(String args[]) {
 					
@@ -21,7 +22,6 @@ public class Main {
 			for(int i = 0; i < 16; i++) {
 				//String hex = Integer.toHexString(screen.colorSecs[i].getRGB() & 0xffffff);
 				String hex = String.format("%1$02x", screen.colorSecs[i].getRGB());
-				//idk why two 00's makes it faster but it does ok.
 				hex = hex.substring(2);
 				//System.out.println("input RGB: " + screen.colorSecs[i].toString() + "output hex: " + hex);
 				//System.out.println("settingColor:" + hex);

@@ -49,11 +49,11 @@ public class SerialCom {
 				break;
 			}
 		}
-		if(arduinoPort == null) {
+		if (arduinoPort == null) {
 			System.out.println("Could not auto-detect Arduino. Please manually select a port");
 			arduinoPort = serialPorts[scUser.nextInt()];
 		}
-				
+
 		try {
 			arduinoPort.setComPortParameters(500000, 8, 1, 0); // default connection settings for Arduino
 			arduinoPort.setComPortTimeouts(SerialPort.TIMEOUT_SCANNER, 0, 0); // block until bytes can be written
@@ -77,7 +77,8 @@ public class SerialCom {
 		// the message
 		if (data.contains("ref")) {
 			String time = scSerial.nextLine();
-			System.out.println(time);
+			if (Main.debug)
+				System.out.println(time);
 		}
 
 	}
