@@ -7,7 +7,7 @@ import com.fazecast.jSerialComm.*;
 
 public class SerialCom {
 
-	private final String DEFAULT_PORT_NAME = "Arduino";
+	private final String DEFAULT_PORT_NAME = "CH340";
 	private String devicePortName;
 	private SerialPort arduinoPort = null;
 	private Scanner scSerial, scUser;
@@ -60,6 +60,7 @@ public class SerialCom {
 			scSerial = new Scanner(arduinoPort.getInputStream());
 		} catch (Exception e) {
 			System.out.println("Could Not find Arduino on selected port or an error occurred. Try again");
+			arduinoPort = null;
 			initConnection();
 		}
 
