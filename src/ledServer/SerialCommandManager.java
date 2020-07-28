@@ -1,12 +1,12 @@
 package ledServer;
 
-public class CommandManager {
+public class SerialCommandManager {
 	private SerialCom serial;
-	public CommandManager() {
+	public SerialCommandManager() {
 		serial = new SerialCom();
 	}
 	
-	public CommandManager(String name) {
+	public SerialCommandManager(String name) {
 		serial = new SerialCom(name);
 	}
 	
